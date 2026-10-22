@@ -1,0 +1,34 @@
+class Solution {
+   public:
+    string s;
+    string encode(vector<string>& strs) {
+        for (string ch : strs) {
+            s += to_string(ch.length());
+            s += '#';
+            s += ch;
+        }
+        return s;
+    }
+
+    vector<string> decode(string s) {
+    vector<string> result;
+    int i = 0;
+
+    while (i < s.length()) {
+        int j = i;
+
+        while (s[j] != '#') {
+            j++;
+        }
+
+        int len = stoi(s.substr(i, j - i));
+
+        string word = s.substr(j + 1, len);
+        result.push_back(word);
+
+        i = j + 1 + len;
+    }
+
+    return result;
+}
+};
